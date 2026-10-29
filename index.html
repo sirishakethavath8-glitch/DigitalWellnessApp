@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#5b5bd6">
+  <meta name="description" content="WellBuddy - Digital Wellness and Mobile Awareness for Students">
+  <title>WellBuddy | Digital Wellness App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <span class="brand-icon">🌱</span>
+      <div>
+        <h1>WellBuddy</h1>
+        <p>Digital Wellness for Every Student</p>
+      </div>
+    </div>
+
+    <button type="button" id="menuToggle" class="secondary" aria-label="Toggle navigation">
+      ☰ Menu
+    </button>
+  </header>
+
+  <nav id="mainNav" aria-label="Main navigation">
+    <button type="button" onclick="showPage('dashboard')">🏠 Home</button>
+    <button type="button" onclick="showPage('survey')">📋 Screen-Time Survey</button>
+    <button type="button" onclick="showPage('challenges')">🎯 Challenges</button>
+    <button type="button" onclick="showPage('quiz')">🧠 Quiz</button>
+    <button type="button" onclick="showPage('awareness')">📚 Awareness</button>
+    <button type="button" onclick="showPage('activities')">🎨 Activities</button>
+    <button type="button" onclick="showPage('ideas')">💡 Ideas Hub</button>
+    <button type="button" onclick="showPage('reports')">📊 Reports</button>
+    <button type="button" onclick="showPage('parent')">👨‍👩‍👧 Parent</button>
+    <button type="button" onclick="showPage('teacher')">👩‍🏫 Teacher</button>
+    <button type="button" onclick="showPage('profile')">👤 Profile</button>
+  </nav>
+
+  <main class="app-main">
+
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="page active">
+      <div class="hero">
+        <div>
+          <span class="eyebrow">YOUR DIGITAL WELLNESS JOURNEY</span>
+          <h2>Hello, WellBuddy! 🌱</h2>
+          <p>Use technology wisely. Make time for learning, friends, family and yourself.</p>
+          <button type="button" onclick="showPage('survey')">Check My Screen Time</button>
+        </div>
+        <div class="hero-illustration" aria-hidden="true">📱🌳✨</div>
+      </div>
+
+      <div class="stats-grid">
+        <article class="card stat-card">
+          <span>📱</span>
+          <h3>Today's Screen Time</h3>
+          <p id="dashboardScreenTime">0 hours</p>
+        </article>
+        <article class="card stat-card">
+          <span>🎯</span>
+          <h3>Challenges Completed</h3>
+          <p id="dashboardChallenges">0</p>
+        </article>
+        <article class="card stat-card">
+          <span>⭐</span>
+          <h3>Wellness Points</h3>
+          <p id="dashboardPoints">0</p>
+        </article>
+        <article class="card stat-card">
+          <span>🌳</span>
+          <h3>Detox Tree</h3>
+          <p id="dashboardTree">🌱 Seedling</p>
+        </article>
+      </div>
+
+      <div class="content-grid">
+        <article class="card">
+          <h3>🌞 Today's Healthy Habits</h3>
+          <p>Mark the activities you complete today.</p>
+          <div id="habitList">
+            <label><input type="checkbox" data-habit="study"> Focused study time</label>
+            <label><input type="checkbox" data-habit="outdoor"> Outdoor play or exercise</label>
+            <label><input type="checkbox" data-habit="family"> Spent time with family</label>
+            <label><input type="checkbox" data-habit="sleep"> Followed a healthy sleep routine</label>
+            <label><input type="checkbox" data-habit="breaks"> Took screen breaks</label>
+          </div>
+          <p id="habitProgress" aria-live="polite">0 habits completed today</p>
+        </article>
+
+        <article class="card">
+          <h3>🌳 Digital Detox Tree</h3>
+          <div id="detoxTree" class="tree-display" aria-live="polite">🌱</div>
+          <p>Every healthy habit helps your tree grow!</p>
+          <div class="progress-track">
+            <div id="treeProgressBar" class="progress-bar" style="width:0%"></div>
+          </div>
+          <p id="treeProgressText">Keep going!</p>
+        </article>
+      </div>
+
+      <article class="card">
+        <h3>⏱️ Study Focus Timer</h3>
+        <p>Study without distractions, then take a short break.</p>
+        <div id="studyTimer" class="timer-display">25:00</div>
+        <div class="button-row">
+          <button type="button" id="startTimer">Start</button>
+          <button type="button" id="pauseTimer" class="secondary">Pause</button>
+          <button type="button" id="resetTimer" class="secondary">Reset</button>
+        </div>
+        <p id="timerStatus" aria-live="polite">Ready for a focused study session.</p>
+      </article>
+    </section>
+
+    <!-- SCREEN-TIME SURVEY -->
+    <section id="survey" class="page" hidden>
+      <div class="section-heading">
+        <span class="eyebrow">KNOW YOUR HABITS</span>
+        <h2>📋 Screen-Time Survey</h2>
+        <p>Enter your screen time honestly to understand your daily habits.</p>
+      </div>
+
+      <article class="card">
+        <form id="screenTimeForm">
+          <label for="screenHours">Daily screen time (hours)</label>
+          <input type="number" id="screenHours" min="0" max="24" step="0.25" required>
+
+          <label for="screenPurpose">Main purpose of screen use</label>
+          <select id="screenPurpose" required>
+            <option value="Learning">Learning and education</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Social Media">Social media</option>
+            <option value="Gaming">Gaming</option>
+            <option value="Mixed">Mixed purposes</option>
+          </select>
+
+          <label for="screenFeeling">How do you feel after screen use?</label>
+          <select id="screenFeeling" required>
+            <option value="Good">Good and relaxed</option>
+            <option value="Tired">Tired</option>
+            <option value="Distracted">Distracted</option>
+            <option value="Stressed">Stressed</option>
+          </select>
+
+          <label for="screenGoal">My daily screen-time goal (hours)</label>
+          <input type="number" id="screenGoal" min="0" max="24" step="0.25" value="3" required>
+
+          <button type="submit">Save My Survey</button>
+        </form>
+        <p id="surveyMessage" class="message" aria-live="polite"></p>
+      </article>
+
+      <article class="card">
+        <h3>💡 Screen-Time Tip</h3>
+        <p>Take regular breaks, avoid unnecessary scrolling, and keep screens away during bedtime.</p>
+      </article>
+    </section>
+
+    <!-- CHALLENGES -->
+    <section id="challenges" class="page" hidden>
+      <div class="section-heading">
+        <span class="eyebrow">SMALL STEPS, BIG CHANGE</span>
+        <h2>🎯 Digital Detox Challenges</h2>
+        <p>Choose a challenge and build healthier habits one day at a time.</p>
+      </div>
+
+      <div class="content-grid">
+        <article class="card challenge-card">
+          <span class="large-emoji">📵</span>
+          <h3>Phone-Free Study</h3>
+          <p>Keep your phone away during a study session.</p>
+          <button type="button" class="complete-challenge" data-challenge="study">
+            Complete Challenge
+          </button>
+        </article>
+
+        <article class="card challenge-card">
+          <span class="large-emoji">🌳</span>
+          <h3>Outdoor Time</h3>
+          <p>Spend 30 minutes playing or exercising outdoors.</p>
+          <button type="button" class="complete-challenge" data-challenge="outdoor">
+            Complete Challenge
+          </button>
+        </article>
+
+        <article class="card challenge-card">
+          <span class="large-emoji">👨‍👩‍👧</span>
+          <h3>Family Connection</h3>
+          <p>Enjoy a family conversation without phones.</p>
+          <button type="button" class="complete-challenge" data-challenge="family">
+            Complete Challenge
+          </button>
+        </article>
+
+        <article class="card challenge-card">
+          <span class="large-emoji">🌙</span>
+          <h3>Screen-Free Bedtime</h3>
+          <p>Put your phone away before bedtime.</p>
+          <button type="button" class="complete-challenge" data-challenge="bedtime">
+            Complete Challenge
+          </button>
+        </article>
+      </div>
+
+      <p id="challengeMessage" class="message" aria-live="polite"></p>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="quiz" class="page" hidden>
+      <div class="section-heading">
+        <span class="eyebrow">LEARN WHILE YOU PLAY</span>
+        <h2>🧠 Digital Wellness Quiz</h2>
+        <p>Test your knowledge about safe and healthy technology use.</p>
+      </div>
+
+      <article class="card">
+        <div id="quizContainer">
+          <p>Get ready to test your digital wellness knowledge!</p>
+        </div>
+        <div class="button-row">
+          <button type="button" id="startQuiz">Start Quiz</button>
+          <button type="button" id="nextQuestion" hidden>Next Question</button>
+        </div>
+        <p id="quizFeedback" class="message" aria-live="polite"></p>
+        <p id="quizScore"></p>
+      </article>
+    </section>
+
+    <!-- AWARENESS -->
+    <section id="awareness" class="page" hidden>
+      <div class="section-heading">
+        <span class="eyebrow">BE AWARE, STAY HEALTHY</span>
+        <h2>📚 Digital Awareness</h2>
+        <p>Learn how to balance screen use with everyday life.</p>
+      </div>
+
+      <div class="content-grid">
+        <article class="card">
+          <span class="large-emoji">👀</span>
+          <h3>Protect Your Eyes</h3>
+          <p>Take regular breaks, blink often and adjust screen brightness for comfort.</p>
+        </article>
+        <article class="card">
+          <span class="large-emoji">😴</span>
+          <h3>Healthy Sleep</h3>
+          <p>Maintain a consistent bedtime and reduce screen distractions before sleeping.</p>
+        </article>
+        <article class="card">
+          <span class="large-emoji">🔐</span>
+          <h3>Cyber Safety</h3>
+          <p>Never share passwords, personal details or private photos with strangers online.</p>
+        </article>
+        <article class="card">
+          <span class="large-emoji">🧘</span>
+          <h3>Mindful Technology</h3>
+          <p>Use devices with a purpose. Pause and check whether an app is helping you.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ACTIVITIES -->
+    <section id="activities" class="page" hidden>
+      <div class="section-heading">
+        <span class="eyebrow">EXPRESS YOUR CREATIVITY</span>
+        <h2>🎨 Activity Corner</h2>
+        <p>Participate in activities that promote digital wellness.</p>
+      </div>
+
+      <div class="content-grid">
+        <article class="card">
+          <h3>🖼️ Poster Competition</h3>
+          <p>Create a poster about balanced mobile usage and cyber safety.</p>
+          <label for="posterUpload">Choose your poster</label>
+          <input type="file" id="posterUpload" accept="image/*">
+          <button type="button" id="uploadPoster">Preview Poster</button>
+          <div id="posterPreview"></div>
+        </article>
+
+        <article class="card">
+          <h3>✍️ Slogan Challenge</h3>
+          <p>Write a short slogan encouraging students to use phones wisely.</p>
+          <label for="sloganInput">Your slogan</label>
+          <textarea id="sloganInput" rows="3" maxlength="200"
+            placeholder="Example: Less scrolling, more living!"></textarea>
+          <button type="button" id="saveSlogan">Save Slogan</button>
+          <p id="sloganMessage" aria-live="polite"></p>
+        </article>
+      </div>
+    </section>
+
+    <!-- STUDENT IDEAS HUB -->
+    <section id="ideas" class="page" hidden>
+      <div class="section-heading">
+        <span class="eyebrow">STUDENT CREATIVITY</span>
+        <h2>💡 Student Ideas Hub</h2>
+        <p>Share ideas that help students build healthier digital habits.</p>
+      </div>
+
+      <article class="card">
+        <h3>🔐 Sign In or Create Your Account</h3>
+        <p class="muted">Use your school-approved email address.</p>
+
+        <form id="ideaAuthForm">
+          <label for="ideaEmail">Email address</label>
+          <input id="ideaEmail" type="email" maxlength="254"
+            autocomplete="username" required placeholder="student@example.com">
+
+          <label for="ideaPassword">Password</label>
+          <input id="ideaPassword" type="password" minlength="8"
+            autocomplete="current-password" required
+            placeholder="At least 8 characters">
+
+          <div class="button-row">
+            <button type="submit">Sign In</button>
+            <button type="button" id="ideaRegister" class="secondary">
+              Create Student Account
+            </button>
+            <button type="button" id="ideaLogout" class="secondary" hidden>
+              Sign Out
+            </button>
+          </div>
+        </form>
+
+        <p id="ideaAuthStatus" class="message" aria-live="polite">
+          Sign in to submit an idea.
+        </p>
+        <p id="ideaRole" class="muted"></p>
+      </article>
+
+      <article class="card">
+        <h3>✍️ Submit a New Idea</h3>
+        <p class="muted">Your idea will stay pending until a teacher approves it.</p>
+
+        <form id="ideaSubmitForm">
+          <label for="ideaTitle">Idea title</label>
+          <input id="ideaTitle" type="text" maxlength="100" required
+            placeholder="Example: Phone-Free Reading Corner">
+
+          <label for="ideaCategory">Category</label>
+          <select id="ideaCategory" required>
+            <option value="Digital Wellness">Digital Wellness</option>
+            <option value="Cyber Safety">Cyber Safety</option>
+            <option value="Healthy Habits">Healthy Habits</option>
+            <option value="School Activities">School Activities</option>
+            <option value="Poster & Slogan">Poster & Slogan</option>
+          </select>
+
+          <label for="ideaDescription">Describe your idea</label>
+          <textarea id="ideaDescription" rows="5" maxlength="1500" required
+            placeholder="What is your idea? How will it help students?"></textarea>
+
+          <label for="ideaPoster">Optional poster image (JPG, PNG or WebP; max 3 MB)</label>
+          <input id="ideaPoster" type="file"
+            accept="image/jpeg,image/png,image/webp">
+
+          <button id="ideaSubmitButton" type="submit" disabled>
+            Submit for Teacher Review
+          </button>
+        </form>
+
+        <p id="ideaSubmitStatus" class="message" aria-live="polite"></p>
+      </article>
+
+      <article class="card">
+        <h3>🌎 Community Idea Wall</h3>
+        <p class="muted">Only teacher-approved ideas appear here.</p>
+        <div id="approvedIdeas">
+          <p>Sign in to load approved ideas.</p>
+        </div>
+      </article>
+
+      <article id="teacherIdeaPanel" class="card" hidden>
+        <h3>👩‍🏫 Teacher Review Panel</h3>
+        <p class="muted">Review submissions before publishing them.</p>
+        <div id="pendingIdeas">
+          <p>No submissions loaded yet.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- REPORTS -->
+    <section id="reports" class="page" hidden>
+      <div class="section-heading">
+        <span class="eyebrow">YOUR PROGRESS</span>
+        <h2>📊 Wellness Reports</h2>
+        <p>Review your recorded habits and progress.</p>
+      </div>
+
+      <article class="card">
+        <h3>Daily Progress</h3>
+        <div id="dailyReport">
+          <p>Your daily progress will appear here.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>Weekly Summary</h3>
+        <div id="weeklyReport">
+          <p>Your weekly summary will appear here as data is recorded.</p>
+        </div>
+        <button type="button" id="exportReport">Export My Report</button>
+      </article>
+
+      <article class="card">
+        <h3>🏅 Achievements</h3>
+        <div id="badges">
+          <p>Complete healthy challenges to earn badges.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>🎓 Wellness Certificate</h3>
+        <p>Celebrate your commitment to digital wellness.</p>
+        <button type="button" id="generateCertificate">Generate Certificate</button>
+        <div id="certificateArea"></div>
+      </article>
+    </section>
+
+    <!-- PARENT DASHBOARD -->
+    <section id="parent" class="page" hidden>
+      <div class="section-heading">
+        <span class="eyebrow">FAMILY SUPPORT</span>
+        <h2>👨‍👩‍👧 Parent Dashboard</h2>
+        <p>Encourage balanced screen use through supportive conversations.</p>
+      </div>
+
+      <article class="card">
+        <h3>Student Wellness Overview</h3>
+        <div id="parentReport">
+          <p>Recorded screen-time and habit summaries will appear here.</p>
+        </div>
+        <p class="muted">
+          This demonstration dashboard uses data saved in this browser.
+          It is not connected to a verified parent account.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3>💚 Tips for Parents</h3>
+        <ul>
+          <li>Agree on reasonable screen-free times together.</li>
+          <li>Encourage outdoor activities, reading and hobbies.</li>
+          <li>Discuss online safety without blaming the child.</li>
+          <li>Set a positive example with your own device habits.</li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- TEACHER DASHBOARD -->
+    <section id="teacher" class="page" hidden>
+      <div class="section-heading">
+        <span class="eyebrow">CLASSROOM WELLNESS</span>
+        <h2>👩‍🏫 Teacher Dashboard</h2>
+        <p>Explore the local demonstration summary for classroom wellness activities.</p>
+      </div>
+
+      <article class="card">
+        <h3>Class Wellness Summary</h3>
+        <div id="teacherReport">
+          <p>Recorded demo activity will appear here.</p>
+        </div>
+        <p class="muted">
+          This is a local prototype dashboard, not a secure school-wide student
+          reporting system. Use the authenticated Ideas Hub teacher panel for
+          online idea moderation.
+        </p>
+      </article>
+    </section>
+
+    <!-- PROFILE -->
+    <section id="profile" class="page" hidden>
+      <div class="section-heading">
+        <span class="eyebrow">YOUR WELLBUDDY PROFILE</span>
+        <h2>👤 Student Profile</h2>
+      </div>
+
+      <article class="card">
+        <form id="profileForm">
+          <label for="studentName">Your name or nickname</label>
+          <input type="text" id="studentName" maxlength="60"
+            placeholder="Enter your name">
+
+          <label for="studentClass">Class or grade (optional)</label>
+          <input type="text" id="studentClass" maxlength="30"
+            placeholder="Enter your class">
+
+          <label for="studentGoal">Daily wellness goal</label>
+          <select id="studentGoal">
+            <option value="balanced">Balanced screen use</option>
+            <option value="study">Improve study focus</option>
+            <option value="sleep">Improve sleep habits</option>
+            <option value="exercise">More outdoor activity</option>
+          </select>
+
+          <button type="submit">Save Profile</button>
+        </form>
+        <p id="profileMessage" class="message" aria-live="polite"></p>
+      </article>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    <p>🌱 WellBuddy — Think Well. Use Technology Wisely.</p>
+    <p>Digital Wellness & Mobile Awareness CSP Project</p>
+    <p class="muted">Educational prototype. Screen time is entered manually.</p>
+  </footer>
+
+  <!-- Existing local app logic -->
+  <script src="script.js"></script>
+
+  <!-- Online Student Ideas Hub -->
+  <script type="module" src="firebase.js"></script>
+</body>
+</html>
